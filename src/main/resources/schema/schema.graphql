@@ -1,0 +1,234 @@
+#Queries
+type Query {
+    employee(employeeId:UUID):Employee
+}
+#Mutations
+type Mutation {
+    updateProfile(id:UUID,input:ProfileInput):Profile
+}
+
+type Subscription {
+    onChat(profileId:UUID): Chat
+}
+
+#Types
+type Employee{
+    id:ID
+}
+type Reaction @connection{
+    id:ID
+    reactedBy:Profile
+    type:String
+    created:DateTime
+    createdBy:User
+}
+
+type Media{
+    id:ID
+    mediaType:String
+    contentType:String
+    extension:String
+    url:String
+    width:Int
+    height:Int
+}
+type Administrator {
+    id:ID
+    email:String
+    name:String
+    avatar:String
+    title:String
+    role:Role,
+    phone:String
+    credential:Credential
+}
+type Job @connection {
+    id:ID
+    created:DateTime
+}
+
+type Experience @connection{
+    id:ID
+    startDate:DateTime
+    endDate:DateTime
+    roleTitle:String
+    roleType:String
+    roleDescription:String
+    organization:String
+    roleCurrent:Boolean
+    location:String
+    media:[Media]
+}
+
+
+type Skill @connection{
+    id:ID
+    created:DateTime
+}
+type Notification @connection{
+    id:ID
+    created:DateTime
+}
+
+type Chat @connection{
+    id:ID
+    initiatedBy:Profile
+    participants:[Profile]
+    messages:[ChatMessage]
+    initialMessage:ChatMessage
+    created:DateTime
+    modified:DateTime
+}
+
+type ChatMessage @connection{
+    id:ID
+    from:Profile
+    to:Profile
+    body:String
+    file:Media
+    created:DateTime
+}
+type Credential{
+    id:ID
+    username:String
+    email:String
+    activated:Boolean
+    password:String
+}
+
+type Permission{
+    code:String
+    name:String
+}
+
+type Role{
+    id:ID
+    name:String
+    permissions:[Permission]
+}
+
+type User @connection{
+    id:ID
+    credential:Credential
+    profile:Profile
+}
+
+type Profile @connection{
+    id:ID
+    firstname:String
+    lastname:String
+    otherName:String
+    name:String
+    headline:String
+    about:String
+    industry:String
+    website:String
+    user:User
+}
+
+
+#Inputs
+input PaginationInput {
+    first: Int
+    after: String
+    last: Int
+    before: String
+}
+input ProfileInput{
+    firstname: String
+    lastname: String
+    otherName:String
+    email:String
+    headline:String
+    industry:String
+    about:String
+}
+input CommentInput{
+    body:String
+    postId:UUID!
+}
+input PostReactionInput{
+    type:String
+    postId:UUID
+}
+
+input CommentReactionInput{
+    type:String
+    commentId:UUID!
+}
+
+input ReplyReactionInput{
+    type:String
+    replyId:UUID
+}
+
+input ChatMessageInput{
+    authorId:UUID
+    chatId:UUID
+    body:String
+}
+
+input PostInput{
+    body:String
+    commentControl:String
+    postVisibility:String
+    originalPostId:UUID
+}
+
+input SentPostInput{
+    body:String
+    postId:UUID
+    recipientIds:[UUID]
+    sendGrouped:Boolean
+}
+
+input ReplyInput{
+    body:String
+    commentId:UUID
+}
+input RoleInput {
+    id:UUID
+}
+input SkillInput {
+    id:UUID
+}
+input ProjectInput {
+    id:UUID
+}
+input ExperienceInput {
+    startDate:DateTime
+    endDate:DateTime
+    roleTitle:String
+    roleType:String
+    roleDescription:String
+    organization:String
+    roleCurrent:Boolean
+    location:String
+}
+input JobInput {
+    id:UUID
+}
+
+#Scalars
+scalar Long
+scalar DateTime
+#scalar Upload
+scalar UUID
+#Not mandatory,only for dev purposes
+directive @connection on OBJECT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
