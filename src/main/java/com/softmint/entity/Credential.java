@@ -38,4 +38,6 @@ public class Credential implements Serializable {
     private LocalDateTime lastPasswordChangedAt;
     @Basic(optional = false)
     private int failedLoginAttempts = 0;
+
+
 }

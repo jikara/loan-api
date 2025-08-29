@@ -34,4 +34,15 @@ public class User {
     @LastModifiedDate
     private LocalDateTime lastModified;
     private Boolean deleted = false;
+
+    public User() {
+    }
+
+    public User(UUID id) {
+        this.id = id;
+    }
+
+    public String getFullName() {
+        return getFirstName() + " " + getLastName();
+    }
 }

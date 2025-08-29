@@ -13,7 +13,7 @@ import java.util.UUID;
 public class EmployeeResolver {
 
     @DgsQuery(field = "employee")
-    public Employee getJobs(@InputArgument UUID employeeId) {
+    public Employee getEmployee(@InputArgument UUID employeeId) {
         return new Employee();
     }
 
