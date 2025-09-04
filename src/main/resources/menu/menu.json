@@ -1,0 +1,29 @@
+[
+  {
+    "route": "dashboard",
+    "name": "dashboard",
+    "type": "link",
+    "icon": "dashboard",
+    "hidden": false
+  },
+  {
+    "route": "role",
+    "name": "role",
+    "type": "sub",
+    "icon": "person",
+    "children": [
+      {
+        "route": "list",
+        "name": "list",
+        "type": "link",
+        "permissions": [
+          "list_roles"
+        ]
+      }
+    ],
+    "permissions": [
+      "list_roles"
+    ],
+    "hidden": false
+  }
+]

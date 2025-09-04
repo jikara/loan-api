@@ -31,7 +31,7 @@ public class PasswordChangeEnforcementFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String path = request.getRequestURI();
         // Allow public or profile endpoints to pass through even if password change is required
-        if (path.contains("/change-password") || path.contains("/me") || path.contains("/logout")) {
+        if (path.contains("/change-password") || path.contains("/me") || path.contains("/logout") || path.contains("/i18n")) {
             filterChain.doFilter(request, response);
             return;
         }

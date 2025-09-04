@@ -24,6 +24,7 @@ public class JwtService {
         this.secretKey = Keys.hmacShaKeyFor(keyBytes);
     }
 
+
     public String extractUserId(String token) {
         return extractClaim(token, Claims::getSubject);
     }
@@ -105,10 +106,10 @@ public class JwtService {
         return claims.getSubject(); // This is the email
     }
 
-    public List<String> extractPermissions(String token) {
+    public Set<String> extractPermissions(String token) {
         Claims claims = extractAllClaims(token);
         List<?> rawList = claims.get("permissions", List.class);
-        List<String> permissions = new ArrayList<>();
+        Set<String> permissions = new HashSet<>();
         if (rawList != null) {
             for (Object item : rawList) {
                 if (item instanceof String) {
@@ -125,4 +126,5 @@ public class JwtService {
         }
         return null;
     }
+
 }

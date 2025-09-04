@@ -1,0 +1,40 @@
+{
+  "menu": [
+    {
+      "route": "clients/dashboard",
+      "name": "dashboard",
+      "type": "link",
+      "icon": "dashboard"
+    },
+    {
+      "route": "clients/vehicle",
+      "name": "vehicle",
+      "type": "link",
+      "icon": "directions_car"
+    },
+    {
+      "route": "clients/job-card",
+      "name": "job_card",
+      "type": "link",
+      "icon": "work"
+    },
+    {
+      "route": "clients/invoice",
+      "name": "invoice",
+      "type": "link",
+      "icon": "receipt"
+    },
+    {
+      "route": "clients/payment",
+      "name": "payment",
+      "type": "link",
+      "icon": "euro_symbol"
+    },
+    {
+      "route": "clients/inspection",
+      "name": "inspection",
+      "type": "link",
+      "icon": "checklist"
+    }
+  ]
+}

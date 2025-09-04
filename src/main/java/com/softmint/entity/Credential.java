@@ -32,8 +32,6 @@ public class Credential implements Serializable {
     private boolean locked = false;
     private boolean expired = false;
     private boolean activated = true;
-    @OneToOne(mappedBy = "credential")
-    private User user;
     private boolean mustChangePassword = true;
     private LocalDateTime lastPasswordChangedAt;
     @Basic(optional = false)

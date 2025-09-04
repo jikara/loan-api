@@ -1,10 +1,12 @@
 package com.softmint.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -13,6 +15,9 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED) // 👈 important
+@EntityListeners({AuditingEntityListener.class})
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -21,7 +26,7 @@ public class User {
     private String lastName;
     private String email;
     private String phone;
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, optional = false)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, optional = false, fetch = FetchType.LAZY)
     private Credential credential;
     @ManyToOne(optional = false)
     private Role role;

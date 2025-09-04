@@ -30,4 +30,6 @@ public class UserSpecification {
             return cb.between(root.get(User_.created), startDate, endDate);
         };
     }
+
+
 }

@@ -17,4 +17,6 @@ public interface UserRepo extends JpaRepository<User, UUID>, JpaSpecificationExe
 
     @Query("SELECT u.credential.mustChangePassword FROM User u WHERE u.id = :id")
     Boolean findMustChangePasswordById(@Param("id") UUID id);
+
+    Optional<User> findUserByCredentialEmail(String email);
 }

@@ -1,0 +1,975 @@
+{
+  "menu": [
+    {
+      "route": "dashboard",
+      "name": "dashboard",
+      "type": "link",
+      "icon": "dashboard"
+    },
+    {
+      "route": "client",
+      "name": "client",
+      "type": "sub",
+      "icon": "people",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "icon": "colorize",
+          "permissions": {
+            "only": [
+              "list_clients"
+            ]
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "icon": "flag",
+          "permissions": {
+            "only": [
+              "create_client"
+            ]
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_clients"
+        ]
+      }
+    },
+    {
+      "route": "vehicle",
+      "name": "vehicle",
+      "type": "sub",
+      "icon": "directions_car",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "icon": "colorize",
+          "permissions": {
+            "only": [
+              "list_vehicles"
+            ]
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "icon": "flag",
+          "permissions": {
+            "only": [
+              "create_vehicle"
+            ]
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_vehicles"
+        ]
+      }
+    },
+    {
+      "route": "vehicle-make",
+      "name": "vehicle-make",
+      "type": "sub",
+      "icon": "build",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "icon": "colorize",
+          "permissions": {
+            "only": [
+              "list_vehicle_makes"
+            ]
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "icon": "flag",
+          "permissions": {
+            "only": [
+              "create_vehicle_make"
+            ]
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_vehicle_makes"
+        ]
+      }
+    },
+    {
+      "route": "vehicle-type",
+      "name": "vehicle-type",
+      "type": "sub",
+      "icon": "directions_car",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "icon": "colorize",
+          "permissions": {
+            "only": [
+              "list_vehicle_types"
+            ]
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "icon": "flag",
+          "permissions": {
+            "only": [
+              "create_vehicle_type"
+            ]
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_vehicle_types"
+        ]
+      }
+    },
+    {
+      "route": "vehicle-model",
+      "name": "vehicle-model",
+      "type": "sub",
+      "icon": "local_shipping",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "icon": "colorize",
+          "permissions": {
+            "only": [
+              "list_vehicle_models"
+            ]
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "icon": "flag",
+          "permissions": {
+            "only": [
+              "create_vehicle_model"
+            ]
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_vehicle_types"
+        ]
+      }
+    },
+    {
+      "route": "insurance",
+      "name": "insurance",
+      "type": "sub",
+      "icon": "shield",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "icon": "colorize",
+          "permissions": {
+            "only": [
+              "list_insurances"
+            ]
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "icon": "flag",
+          "permissions": {
+            "only": [
+              "create_insurance"
+            ]
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_insurances"
+        ]
+      }
+    },
+    {
+      "route": "markup",
+      "name": "markup",
+      "type": "sub",
+      "icon": "directions_car",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "icon": "colorize",
+          "permissions": {
+            "only": [
+              "list_markups"
+            ]
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "icon": "flag",
+          "permissions": {
+            "only": [
+              "create_markup"
+            ]
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_markups"
+        ]
+      }
+    },
+    {
+      "route": "tax",
+      "name": "tax",
+      "type": "sub",
+      "icon": "money_off",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "icon": "colorize",
+          "permissions": {
+            "only": [
+              "list_taxes"
+            ]
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "icon": "flag",
+          "permissions": {
+            "only": [
+              "create_tax"
+            ]
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_taxes"
+        ]
+      }
+    },
+    {
+      "route": "material-request",
+      "name": "material_request",
+      "type": "sub",
+      "icon": "receipt",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "icon": "colorize",
+          "permissions": {
+            "only": [
+              "list_material_requests"
+            ]
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "icon": "flag",
+          "permissions": {
+            "only": [
+              "create_material_request"
+            ]
+          }
+        },
+        {
+          "route": "workshop-approve",
+          "name": "workshop_approve",
+          "type": "link",
+          "icon": "flag",
+          "permissions": {
+            "only": [
+              "workshop_approve_material_request"
+            ]
+          }
+        },
+        {
+          "route": "issuance",
+          "name": "issuance",
+          "type": "link",
+          "icon": "flag",
+          "permissions": {
+            "only": [
+              "issue_material_request"
+            ]
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_material_requests"
+        ]
+      }
+    },
+    {
+      "route": "purchase-request",
+      "name": "purchase_request",
+      "type": "sub",
+      "icon": "receipt",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "icon": "colorize",
+          "permissions": {
+            "only": [
+              "list_purchase_requests"
+            ]
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "icon": "flag",
+          "permissions": {
+            "only": [
+              "create_purchase_request"
+            ]
+          }
+        },
+        {
+          "route": "management-approve",
+          "name": "management_approve",
+          "type": "link",
+          "icon": "flag",
+          "permissions": {
+            "only": [
+              "approve_purchase_request"
+            ]
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_purchase_requests"
+        ]
+      }
+    },
+    {
+      "route": "lpo",
+      "name": "lpo",
+      "type": "sub",
+      "icon": "receipt",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "icon": "colorize",
+          "permissions": {
+            "only": [
+              "list_lpos"
+            ]
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "icon": "flag",
+          "permissions": {
+            "only": [
+              "create_lpo"
+            ]
+          }
+        },
+        {
+          "route": "workshop_approve",
+          "name": "workshop_approve",
+          "type": "link",
+          "icon": "flag",
+          "permissions": {
+            "only": [
+              "workshop_approve_lpo"
+            ]
+          }
+        },
+        {
+          "route": "voucher_approval",
+          "name": "voucher_approval",
+          "type": "link",
+          "icon": "flag",
+          "permissions": {
+            "only": [
+              "approve_lpo_voucher_below_50k",
+              "approve_lpo_voucher_between_50k_and_250k",
+              "approve_lpo_voucher_above_250k"
+            ]
+          }
+        },
+        {
+          "route": "process",
+          "name": "process",
+          "type": "link",
+          "icon": "flag",
+          "permissions": {
+            "only": [
+              "process_lpo"
+            ]
+          }
+        },
+        {
+          "route": "process-payment",
+          "name": "payment",
+          "type": "link",
+          "icon": "flag",
+          "permissions": {
+            "only": [
+              "process_lpo_payment"
+            ]
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_lpos"
+        ]
+      }
+    },
+    {
+      "route": "vendor-return",
+      "name": "vendor_return",
+      "type": "sub",
+      "icon": "work",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "permissions": {
+            "only": "list_vendor_returns"
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "permissions": {
+            "only": [
+              "create_vendor_return"
+            ]
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_vendor_returns"
+        ]
+      }
+    },
+    {
+      "route": "job-card",
+      "name": "job_card",
+      "type": "sub",
+      "icon": "work",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "permissions": {
+            "only": "list_job_cards"
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "permissions": {
+            "only": [
+              "create_job_card"
+            ]
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_job_cards"
+        ]
+      }
+    },
+    {
+      "route": "vendor",
+      "name": "vendor",
+      "type": "sub",
+      "icon": "store",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "permissions": {
+            "only": "list_vendors"
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "permissions": {
+            "only": "create_vendor"
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_vendors"
+        ]
+      }
+    },
+    {
+      "route": "invoice",
+      "name": "invoice",
+      "type": "link",
+      "icon": "receipt",
+      "permissions": {
+        "only": [
+          "list_invoices"
+        ]
+      }
+    },
+    {
+      "route": "payment",
+      "name": "payment",
+      "type": "sub",
+      "icon": "euro_symbol",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "permissions": {
+            "only": "list_payments"
+          }
+        },
+        {
+          "route": "process",
+          "name": "process",
+          "type": "link",
+          "permissions": {
+            "only": "create_payment"
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_payments"
+        ]
+      }
+    },
+    {
+      "route": "inventory",
+      "name": "inventory",
+      "type": "sub",
+      "icon": "store",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "permissions": {
+            "only": "list_inventories"
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "permissions": {
+            "only": "create_inventory"
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_inventories"
+        ]
+      }
+    },
+    {
+      "route": "inspection",
+      "name": "inspection",
+      "type": "sub",
+      "icon": "checklist",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "permissions": {
+            "only": "list_inspections"
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "permissions": {
+            "only": "create_inspection"
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_inspections"
+        ]
+      }
+    },
+    {
+      "route": "parts",
+      "name": "part",
+      "type": "sub",
+      "icon": "build",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "permissions": {
+            "only": "list_parts"
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "permissions": {
+            "only": "create_part"
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_parts"
+        ]
+      }
+    },
+    {
+      "route": "part-category",
+      "name": "part-category",
+      "type": "sub",
+      "icon": "category",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "permissions": {
+            "only": "list_part_categories"
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "permissions": {
+            "only": "create_part_category"
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_part_categories"
+        ]
+      }
+    },
+    {
+      "route": "part-make",
+      "name": "part-make",
+      "type": "sub",
+      "icon": "category",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "permissions": {
+            "only": "list_parts"
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "permissions": {
+            "only": "create_part"
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_parts"
+        ]
+      }
+    },
+    {
+      "route": "service",
+      "name": "service",
+      "type": "sub",
+      "icon": "local_car_wash",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "permissions": {
+            "only": "list_services"
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "permissions": {
+            "only": "create_service"
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_services"
+        ]
+      }
+    },
+    {
+      "route": "service-type",
+      "name": "service-type",
+      "type": "sub",
+      "icon": "category",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "permissions": {
+            "only": "list_service_types"
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "permissions": {
+            "only": "create_service_type"
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_service_types"
+        ]
+      }
+    },
+    {
+      "route": "role",
+      "name": "role",
+      "type": "sub",
+      "icon": "person",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "permissions": {
+            "only": "list_roles"
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "permissions": {
+            "only": "create_role"
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_roles"
+        ]
+      }
+    },
+    {
+      "route": "users",
+      "name": "users",
+      "type": "sub",
+      "icon": "supervised_user_circle",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link",
+          "permissions": {
+            "only": "list_users"
+          }
+        },
+        {
+          "route": "create",
+          "name": "create",
+          "type": "link",
+          "permissions": {
+            "only": "create_user"
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "list_users"
+        ]
+      }
+    },
+    {
+      "route": "report",
+      "name": "report",
+      "type": "sub",
+      "icon": "report",
+      "children": [
+        {
+          "route": "client-payments",
+          "name": "client_payments_report",
+          "type": "link",
+          "permissions": {
+            "only": "view_reports"
+          }
+        },
+        {
+          "route": "vendor-payments",
+          "name": "vendor_payments_report",
+          "type": "link",
+          "permissions": {
+            "only": "view_reports"
+          }
+        },
+        {
+          "route": "reconciliation",
+          "name": "reconciliation",
+          "type": "link",
+          "permissions": {
+            "only": "view_reports"
+          }
+        },
+        {
+          "route": "withholding-tax",
+          "name": "withholding_tax",
+          "type": "link",
+          "permissions": {
+            "only": "view_reports"
+          }
+        },
+        {
+          "route": "parts-movement",
+          "name": "parts_movement",
+          "type": "link",
+          "permissions": {
+            "only": "view_reports"
+          }
+        },
+        {
+          "route": "credit-note",
+          "name": "credit-note",
+          "type": "link",
+          "permissions": {
+            "only": "view_reports"
+          }
+        },
+        {
+          "route": "sales",
+          "name": "sales_report",
+          "type": "link",
+          "permissions": {
+            "only": "view_reports"
+          }
+        },
+        {
+          "route": "profit",
+          "name": "profit_report",
+          "type": "link",
+          "permissions": {
+            "only": "view_reports"
+          }
+        },
+        {
+          "route": "account-payable",
+          "name": "account_payable",
+          "type": "link",
+          "permissions": {
+            "only": "view_reports"
+          }
+        },
+        {
+          "route": "client-statement",
+          "name": "client_statement",
+          "type": "link",
+          "permissions": {
+            "only": "view_reports"
+          }
+        },
+        {
+          "route": "vehicle-statement",
+          "name": "vehicle_statement",
+          "type": "link",
+          "permissions": {
+            "only": "view_reports"
+          }
+        },
+        {
+          "route": "audit",
+          "name": "audit",
+          "type": "link",
+          "permissions": {
+            "only": "view_audit_logs"
+          }
+        }
+      ],
+      "permissions": {
+        "only": [
+          "view_reports"
+        ]
+      }
+    }
+  ]
+}
