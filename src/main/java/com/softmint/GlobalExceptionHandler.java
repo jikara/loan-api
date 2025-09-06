@@ -14,11 +14,27 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(LoanApprovalException.class)
+    public ResponseEntity<ErrorResponse> handleException(LoanApprovalException ex) {
+        // ex.printStackTrace();
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse(ex.getMessage()));
+    }
+
+    @ExceptionHandler(CreateEmployeeException.class)
+    public ResponseEntity<ErrorResponse> handleException(CreateEmployeeException ex) {
+        // ex.printStackTrace();
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse(ex.getMessage()));
+    }
+
     @ExceptionHandler(LoanApplicationException.class)
     public ResponseEntity<ErrorResponse> handleException(LoanApplicationException ex) {
         // ex.printStackTrace();
         return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
+                .status(HttpStatus.BAD_REQUEST)
                 .body(new ErrorResponse(ex.getMessage()));
     }
 

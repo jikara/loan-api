@@ -110,11 +110,11 @@ public class MenuServiceImpl implements MenuService {
                                         .build(),
                                 // approvals
                                 MenuItem.builder()
-                                        .route("list")
-                                        .name("list")
+                                        .route("approve")
+                                        .name("approve")
                                         .type("link")
                                         .icon("colorize")
-                                        .permissions(List.of("list_loan_approvals"))
+                                        .permissions(List.of("approve_loan"))
                                         .build(),
                                 //apply
                                 MenuItem.builder()
@@ -126,7 +126,7 @@ public class MenuServiceImpl implements MenuService {
                                         .build()
 
                         ))
-                        .permissions(List.of("list_loans", "apply_loan"))
+                        .permissions(List.of("list_loans", "apply_loan","approve_loan"))
                         .build(),
 
                 MenuItem.builder()

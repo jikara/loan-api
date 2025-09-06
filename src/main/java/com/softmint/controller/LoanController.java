@@ -54,6 +54,21 @@ public class LoanController {
         return ResponseEntity.ok(model);
     }
 
+    @GetMapping("/approvals/filter")
+    public ResponseEntity<?> filterApprovals(
+            Authentication authentication,
+            @RequestParam(required = false) String searchKey,
+            @RequestParam(required = false) String startDate,
+            @RequestParam(required = false) String endDate,
+            Pageable pageable
+    ) {
+        LocalDateTime start = DateTimeUtil.parseStartOfDay(startDate);
+        LocalDateTime end = DateTimeUtil.parseEndOfDay(endDate);
+        Page<Loan> page = loanService.findPendingApprovalsByFilters(authentication, searchKey, start, end, pageable);
+        PagedModel<EntityModel<Loan>> model = pagedResourcesAssembler.toModel(page, assembler);
+        return ResponseEntity.ok(model);
+    }
+
     @PostMapping("create")
     public ResponseEntity<?> create(
             Authentication authentication,

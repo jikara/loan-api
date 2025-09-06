@@ -2,9 +2,9 @@ package com.softmint.enums;
 
 public enum LoanPerformanceStatus {
     PENDING,
-    APPROVED,
-    DISBURSED,
+    PERFORMING,
+    NON_PERFORMING,
     SETTLED,
+    DEFAULT,
     WRITTEN_OFF,
-    CANCELLED
 }

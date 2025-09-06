@@ -4,10 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -22,6 +20,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @RequiredArgsConstructor
+@SuperBuilder
 @MappedSuperclass
 @EntityListeners({AuditingEntityListener.class})
 public abstract class Auditable implements Serializable {
@@ -36,6 +35,7 @@ public abstract class Auditable implements Serializable {
     private User lastModifiedBy;
     @LastModifiedDate
     private LocalDateTime lastModified;
+    @Builder.Default
     private Boolean deleted = false;
 
     public String getCreatedByDisplayName() {

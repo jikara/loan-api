@@ -7,7 +7,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.UUID;
 
-@RepositoryRestResource(collectionResourceRel = "employerUsers", path = "employer-user")
+@RepositoryRestResource(collectionResourceRel = "users", path = "employer-user")
 public interface EmployerUserRepo extends JpaRepository<EmployerUser, UUID>, JpaSpecificationExecutor<EmployerUser> {
 
 }

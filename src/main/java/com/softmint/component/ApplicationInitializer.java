@@ -44,37 +44,52 @@ public class ApplicationInitializer implements CommandLineRunner {
     }
 
     private void initializePermissions() {
-        String[] permissions = {
-                "apply_loan",
-                "create_employer",
-                "create_employee",
-                "create_product",
-                "create_permission",
-                "create_role",
-                "create_user",
-                "create_setup",
-                "edit_permission",
-                "edit_role",
-                "list_employers",
-                "list_employees",
-                "list_products",
-                "list_loans",
-                "list_permissions",
-                "list_roles",
-                "list_users",
-                "view_permission",
-                "view_loan",
-                "view_audit_logs"
-        };
-        for (String permissionCode : permissions) {
-            if (permissionRepo.findById(permissionCode).isEmpty()) {
-                Permission permission = new Permission();
-                permission.setCode(permissionCode);
-                permission.setName(convertToNormalCase(permissionCode));
-                permissionRepo.save(permission);
-                System.out.println("Initialized permission: " + permissionCode);
-            }
+        record PermissionSeed(String code, boolean assignable) {
         }
+        var permissions = Set.of(
+                new PermissionSeed("apply_loan", false),
+                new PermissionSeed("approve_loan", true),
+                new PermissionSeed("create_employer", true),
+                new PermissionSeed("create_employees", false),
+                new PermissionSeed("create_employee", false),
+                new PermissionSeed("create_product", true),
+                new PermissionSeed("create_permission", true),
+                new PermissionSeed("create_role", true),
+                new PermissionSeed("create_user", true),
+                new PermissionSeed("create_setup", true),
+                new PermissionSeed("edit_permission", true),
+                new PermissionSeed("edit_role", true),
+                new PermissionSeed("list_employers", true),
+                new PermissionSeed("list_employees", true),
+                new PermissionSeed("list_products", true),
+                new PermissionSeed("list_loans", true),
+                new PermissionSeed("list_permissions", true),
+                new PermissionSeed("list_roles", true),
+                new PermissionSeed("list_users", true),
+                new PermissionSeed("view_permission", true),
+                new PermissionSeed("view_loan", true),
+                new PermissionSeed("view_employee", true),
+                new PermissionSeed("edit_employee", true),
+
+
+                new PermissionSeed("list_approval_policies", true),
+                new PermissionSeed("create_approval_policy", true),
+                new PermissionSeed("view_approval_policy", true),
+                new PermissionSeed("edit_approval_policy", true),
+
+                new PermissionSeed("view_audit_logs", false) // 👈 static permission
+        );
+
+        permissions.forEach(seed -> {
+            permissionRepo.findById(seed.code()).orElseGet(() -> {
+                Permission permission = Permission.builder()
+                        .code(seed.code())
+                        .name(convertToNormalCase(seed.code()))
+                        .assignable(seed.assignable())
+                        .build();
+                return permissionRepo.save(permission);
+            });
+        });
     }
 
     private void initializeSystemAdminRole() {
@@ -108,15 +123,17 @@ public class ApplicationInitializer implements CommandLineRunner {
                 "Employer HR role with approval permissions",
                 Set.of(
                         permissionRepo.findById("create_employee").orElseThrow(),
-                        permissionRepo.findById("list_employees").orElseThrow()
+                        permissionRepo.findById("list_employees").orElseThrow(),
+                        permissionRepo.findById("list_loans").orElseThrow(),
+                        permissionRepo.findById("approve_loan").orElseThrow()
                 )
         );
 
         seedOrUpdateStaticRole(StaticRoleType.EMPLOYER_FINANCE, "FINANCE",
                 "Employer Finance role with financial approval permissions",
                 Set.of(
-                        permissionRepo.findById("create_product").orElseThrow(),
-                        permissionRepo.findById("list_loans").orElseThrow()
+                        permissionRepo.findById("list_loans").orElseThrow(),
+                        permissionRepo.findById("approve_loan").orElseThrow()
                 )
         );
 
@@ -125,8 +142,10 @@ public class ApplicationInitializer implements CommandLineRunner {
                 Set.of(
                         permissionRepo.findById("create_employee").orElseThrow(),
                         permissionRepo.findById("list_employees").orElseThrow(),
-                        permissionRepo.findById("create_product").orElseThrow(),
-                        permissionRepo.findById("list_loans").orElseThrow()
+                        permissionRepo.findById("view_employee").orElseThrow(),
+                        permissionRepo.findById("edit_employee").orElseThrow(),
+                        permissionRepo.findById("list_loans").orElseThrow(),
+                        permissionRepo.findById("approve_loan").orElseThrow()
                 )
         );
 
@@ -142,19 +161,23 @@ public class ApplicationInitializer implements CommandLineRunner {
         System.out.println("Initialized Static Roles: HR, FINANCE, ADMIN, EMPLOYEE");
     }
 
-    private void seedOrUpdateStaticRole(StaticRoleType type, String name, String description, Set<Permission> permissions) {
-        StaticRole role = staticRoleRepo.findStaticRoleByType(type).orElseGet(() -> {
-            StaticRole r = new StaticRole();
-            r.setPermissions(new HashSet<>()); // ensure initialized
-            return r;
-        });
+    private void seedOrUpdateStaticRole(
+            StaticRoleType type, String name, String description, Set<Permission> permissions) {
 
-        role.setType(type);
-        role.setName(name);
-        role.setDescription(description);
-
-        // Merge new permissions with existing managed collection
-        role.getPermissions().addAll(permissions);
+        StaticRole role = staticRoleRepo.findStaticRoleByType(type)
+                .map(existing -> {
+                    existing.setName(name);
+                    existing.setDescription(description);
+                    existing.getPermissions().addAll(permissions); // merge
+                    return existing;
+                })
+                .orElseGet(() -> StaticRole.builder()
+                        .type(type)
+                        .name(name)
+                        .description(description)
+                        .permissions(new HashSet<>(permissions))
+                        .build()
+                );
 
         staticRoleRepo.save(role);
     }

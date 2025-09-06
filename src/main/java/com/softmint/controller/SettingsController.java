@@ -50,7 +50,9 @@ public class SettingsController {
     public AuthUser getMe(@RequestHeader("Authorization") String authorizationHeader) throws IOException {
         String token = jwtService.extractBearerToken(authorizationHeader);
         User user = userService.getUserById(UUID.fromString(jwtService.extractUserId(token)));
-        return authUserService.loadUserByUsername(user.getEmail());
+        AuthUser authUser = authUserService.loadUserByUsername(user.getEmail());
+        authUser.setRoleType(user.getRoleType());
+        return authUser;
     }
 
     @GetMapping("me/menu")

@@ -50,4 +50,14 @@ public class User {
     public String getFullName() {
         return getFirstName() + " " + getLastName();
     }
+
+    public String getRoleType() {
+        if (this instanceof EmployerUser) {
+            return "EMPLOYER";
+        } else if (this instanceof EmployeeUser) {
+            return "EMPLOYEE";
+        } else {
+            return "LENDER";
+        }
+    }
 }

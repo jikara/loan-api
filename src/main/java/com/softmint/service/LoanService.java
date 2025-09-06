@@ -15,7 +15,13 @@ public interface LoanService {
 
     Loan create(Authentication authentication, Loan model);
 
+    Loan getEmployeeExistingPendingLoan(UUID borrowerId);
+
     Loan getEmployeeExistingUnsettledLoan(UUID employeeId);
 
-    Loan findById(Authentication authentication, UUID id);
+    Loan findById(Authentication authentication, UUID loanId);
+
+    Loan save(Loan loan);
+
+    Page<Loan> findPendingApprovalsByFilters(Authentication authentication, String searchKey, LocalDateTime startDate, LocalDateTime endDate, Pageable pageable);
 }

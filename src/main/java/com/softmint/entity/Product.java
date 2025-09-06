@@ -43,6 +43,9 @@ public class Product extends Auditable {
     private List<Interest> negotiatedInterests;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductDocument> documents;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "approval_policy_id")
+    private ApprovalPolicy approvalPolicy;
 
 
     public void setDocuments(List<ProductDocument> documents) {
@@ -50,5 +53,12 @@ public class Product extends Auditable {
             document.setProduct(this);
         }
         this.documents = documents;
+    }
+
+    public String getApprovalPolicyName() {
+        if (approvalPolicy != null) {
+            return approvalPolicy.getName();
+        }
+        return null;
     }
 }

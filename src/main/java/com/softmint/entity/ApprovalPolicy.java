@@ -1,10 +1,10 @@
 package com.softmint.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -13,18 +13,19 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "approval_policies")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ApprovalPolicy extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "product_id")
-    private Product product;
-    private BigDecimal minAmount;
-    private BigDecimal maxAmount;
+    @Basic(optional = false)
+    private String name;
     private boolean active = true;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "first_step_id")
+    private ApprovalStep firstStep;
+    // All steps belonging to this policy
     @OneToMany(mappedBy = "approvalPolicy", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OrderBy("orderIndex ASC")
     private List<ApprovalStep> steps = new ArrayList<>();
 }
 

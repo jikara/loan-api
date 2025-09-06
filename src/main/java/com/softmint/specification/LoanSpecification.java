@@ -1,6 +1,7 @@
 package com.softmint.specification;
 
 import com.softmint.entity.*;
+import com.softmint.enums.LoanApprovalStatus;
 import com.softmint.enums.LoanLifecycleStatus;
 import com.softmint.enums.LoanPerformanceStatus;
 import jakarta.persistence.criteria.Join;
@@ -13,11 +14,32 @@ import java.util.UUID;
 
 public class LoanSpecification {
 
+    public static Specification<Loan> hasCurrentStepAssignedToRole(UUID roleId) {
+        return (root, query, cb) -> cb.equal(
+                root.get(Loan_.currentStep).get(ApprovalStep_.assignedRole).get(Role_.id), roleId
+        );
+    }
+
+
+    public static Specification<Loan> performanceStatusEqual(LoanPerformanceStatus status) {
+        return (root, query, cb) ->
+                status == null
+                        ? cb.conjunction()
+                        : cb.equal(root.get(Loan_.performanceStatus), status);
+    }
+
     public static Specification<Loan> performanceStatusNotEqual(LoanPerformanceStatus status) {
         return (root, query, cb) ->
                 status == null
                         ? cb.conjunction()
                         : cb.notEqual(root.get(Loan_.performanceStatus), status);
+    }
+
+    public static Specification<Loan> lifecycleStatusEqual(LoanLifecycleStatus status) {
+        return (root, query, cb) ->
+                status == null
+                        ? cb.conjunction()
+                        : cb.equal(root.get(Loan_.performanceStatus), status);
     }
 
     public static Specification<Loan> lifecycleStatusNotEqual(LoanLifecycleStatus status) {
@@ -45,12 +67,20 @@ public class LoanSpecification {
             if (searchKey == null || searchKey.trim().isEmpty()) {
                 return cb.conjunction();
             }
+
             String likeKey = "%" + searchKey.toLowerCase() + "%";
+
+            // join with metamodels
+            Join<Loan, Employee> employeeJoin = root.join(Loan_.borrower, JoinType.LEFT);
+            Join<Employee, EmployeeProfile> profileJoin = employeeJoin.join(Employee_.profile, JoinType.LEFT);
+
             return cb.or(
-                    cb.like(cb.lower(root.get(Loan_.reference)), likeKey)
+                    cb.like(cb.lower(root.get(Loan_.reference)), likeKey),
+                    cb.like(cb.lower(profileJoin.get(EmployeeProfile_.idNumber)), likeKey)
             );
         };
     }
+
 
     public static Specification<Loan> createdBetween(LocalDateTime startDate, LocalDateTime endDate) {
         return (root, query, cb) -> {
@@ -74,4 +104,12 @@ public class LoanSpecification {
     }
 
 
+    public static Specification<Loan> hasApprovalStatus(LoanApprovalStatus loanApprovalStatus) {
+        return (root, query, cb) -> {
+            if (loanApprovalStatus == null) {
+                return cb.conjunction(); // no filtering if status is null
+            }
+            return cb.equal(root.get(Loan_.approvalStatus), loanApprovalStatus);
+        };
+    }
 }

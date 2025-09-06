@@ -11,12 +11,11 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,6 +24,16 @@ public class InterestController {
     private final InterestService interestService;
     private final InterestModelAssembler assembler;
     private final PagedResourcesAssembler<Interest> pagedResourcesAssembler;
+
+    @GetMapping("/negotiated/{productId}")
+    public ResponseEntity<?> findNegotiated(Authentication authentication,
+                                            @PathVariable UUID productId) {
+        Interest negotiated = interestService.findNegotiated(authentication, productId);
+        if (negotiated == null) {
+            return ResponseEntity.ok(null);
+        }
+        return ResponseEntity.ok(assembler.toModel(negotiated));
+    }
 
     @GetMapping("/filter")
     public ResponseEntity<?> filter(

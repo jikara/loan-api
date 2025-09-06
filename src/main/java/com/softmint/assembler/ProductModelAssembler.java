@@ -1,5 +1,6 @@
 package com.softmint.assembler;
 
+import com.softmint.entity.ApprovalPolicy;
 import com.softmint.entity.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.EntityModel;
@@ -17,9 +18,19 @@ public class ProductModelAssembler implements RepresentationModelAssembler<Produ
     @Override
     @NonNull
     public EntityModel<Product> toModel(@NonNull Product product) {
-        return EntityModel.of(product,
+        EntityModel<Product> model = EntityModel.of(product,
                 entityLinks.linkToItemResource(Product.class, product.getId()).withSelfRel());
+
+        if (product.getApprovalPolicy() != null) {
+            model.add(
+                    entityLinks.linkToItemResource(ApprovalPolicy.class, product.getApprovalPolicy().getId())
+                            .withRel("approvalPolicy")
+            );
+        }
+
+        return model;
     }
+
 
 
 }

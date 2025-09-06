@@ -1,17 +1,21 @@
 package com.softmint.service.impl;
 
-import com.softmint.entity.*;
+import com.softmint.entity.Credential;
+import com.softmint.entity.Employer;
+import com.softmint.entity.EmployerUser;
+import com.softmint.entity.Role;
 import com.softmint.enums.StaticRoleType;
 import com.softmint.repo.EmployerRepo;
 import com.softmint.service.CredentialService;
-import com.softmint.service.StaticRoleService;
 import com.softmint.service.EmployerService;
+import com.softmint.service.StaticRoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -36,5 +40,10 @@ public class EmployerServiceImpl implements EmployerService {
             user.setCredential(credential);
         }
         return employerRepo.save(model);
+    }
+
+    @Override
+    public Employer findById(UUID id) {
+        return employerRepo.findById(id).orElse(null);
     }
 }

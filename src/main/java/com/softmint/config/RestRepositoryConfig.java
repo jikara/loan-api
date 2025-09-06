@@ -22,6 +22,8 @@ public class RestRepositoryConfig implements RepositoryRestConfigurer {
         for (Class<?> domainType : repositories) {
             config.exposeIdsFor(domainType);
         }
+        config.setDefaultPageSize(20);
+        config.setMaxPageSize(1000);
     }
 
     @Bean

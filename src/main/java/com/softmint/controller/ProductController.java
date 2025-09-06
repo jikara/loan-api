@@ -11,6 +11,7 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -22,6 +23,13 @@ public class ProductController {
     private final ProductService productService;
     private final ProductModelAssembler assembler;
     private final PagedResourcesAssembler<Product> pagedResourcesAssembler;
+
+    @GetMapping()
+    public ResponseEntity<?> findAll(Authentication authentication, Pageable pageable) {
+        Page<Product> page = productService.findAll(authentication, pageable);
+        PagedModel<EntityModel<Product>> model = pagedResourcesAssembler.toModel(page, assembler);
+        return ResponseEntity.ok(model);
+    }
 
     @GetMapping("/filter")
     public ResponseEntity<?> filter(

@@ -15,6 +15,8 @@ public class AuthUser extends User {
     private UUID id;
     private String displayName;
     private boolean mustChangePassword;
+    private String roleType;
+    private String avatar = "images/avatar.jpg";
 
     public AuthUser(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);

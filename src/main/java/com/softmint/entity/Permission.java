@@ -4,11 +4,13 @@ import jakarta.persistence.Basic;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "permissions")
 public class Permission {
@@ -17,4 +19,7 @@ public class Permission {
     @Basic(optional = false)
     private String name;
     private String description;
+    @Basic(optional = false)
+    @Builder.Default
+    private boolean assignable = true;
 }

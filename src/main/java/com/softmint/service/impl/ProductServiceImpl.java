@@ -6,6 +6,7 @@ import com.softmint.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -29,5 +30,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product findById(UUID id) {
         return productRepo.findById(id).orElse(null);
+    }
+
+    @Override
+    public Page<Product> findAll(Authentication authentication, Pageable pageable) {
+        return productRepo.findAll(pageable);
     }
 }

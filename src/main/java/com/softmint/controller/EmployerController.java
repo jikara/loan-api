@@ -1,6 +1,7 @@
 package com.softmint.controller;
 
 import com.softmint.assembler.EmployerModelAssembler;
+import com.softmint.entity.Employee;
 import com.softmint.entity.Employer;
 import com.softmint.service.EmployerService;
 import com.softmint.util.DateTimeUtil;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -22,6 +24,14 @@ public class EmployerController {
     private final EmployerService employerService;
     private final EmployerModelAssembler assembler;
     private final PagedResourcesAssembler<Employer> pagedResourcesAssembler;
+
+
+    @GetMapping("{id}")
+    public ResponseEntity<?> find(@PathVariable UUID id) {
+        Employer employer = employerService.findById(id);
+        return ResponseEntity.ok(assembler.toModel(employer));
+    }
+
 
     @GetMapping("/filter")
     public ResponseEntity<?> filter(
